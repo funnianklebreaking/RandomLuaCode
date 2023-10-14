@@ -1,4 +1,6 @@
-local plr = game:GetService("Players").LocalPlayerfunction RunCustomAnimation(Char)
+local plr = game:GetService("Players").LocalPlayer
+
+function RunCustomAnimation(Char)
 	if Char:WaitForChild("Animate") ~= nil then
 		Char.Animate.Disabled = true
 	end
@@ -47,7 +49,7 @@ local plr = game:GetService("Players").LocalPlayerfunction RunCustomAnimation(Ch
 	local animTable = {}
 	local animNames = { 
 		idle = 	{
-			{ id = "http://www.roblox.com/asset/?id=12521158637", weight = 10 }
+			{ id = "http://www.roblox.com/asset/?id=12521158637", weight = 10 },
 		},
 		walk = 	{
 			{ id = "http://www.roblox.com/asset/?id=12518152696", weight = 10 }
