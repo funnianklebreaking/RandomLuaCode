@@ -47,59 +47,60 @@ function RunCustomAnimation(Char)
 	local PreloadedAnims = {}
 
 	local animTable = {}
-	local animNames = { 
-		idle = 	{
-			{ id = "http://www.roblox.com/asset/?id=12521158637", weight = 10 },
-		},
-		walk = 	{
-			{ id = "http://www.roblox.com/asset/?id=12518152696", weight = 10 }
-		},
-		run = 	{
-			{ id = "http://www.roblox.com/asset/?id=12518152696", weight = 10 } 
-		},
-		climb = {
-			{ id = "http://www.roblox.com/asset/?id=12520982150", weight = 10 }
-		},
-		sit = 	{
-			{ id = "http://www.roblox.com/asset/?id=12520993168", weight = 10 }
-		},
-		toolnone = {
-			{ id = "http://www.roblox.com/asset/?id=12520996634", weight = 10 }
-		},
-		toolslash = {
-			{ id = "http://www.roblox.com/asset/?id=12520999032", weight = 10 }
-		},
-		toollunge = {
-			{ id = "http://www.roblox.com/asset/?id=12521002003", weight = 10 }
-		},
-		wave = {
-			{ id = "http://www.roblox.com/asset/?id=12521004586", weight = 10 }
-		},
-		point = {
-			{ id = "http://www.roblox.com/asset/?id=12521007694", weight = 10 }
-		},
-		dance = {
-			{ id = "http://www.roblox.com/asset/?id=12521009666", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521151637", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521015053", weight = 10 }
-		},
-		dance2 = {
-			{ id = "http://www.roblox.com/asset/?id=12521169800", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521173533", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521027874", weight = 10 }
-		},
-		dance3 = {
-			{ id = "http://www.roblox.com/asset/?id=12521178362", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521181508", weight = 10 },
-			{ id = "http://www.roblox.com/asset/?id=12521184133", weight = 10 }
-		},
-		laugh = {
-			{ id = "http://www.roblox.com/asset/?id=12521018724", weight = 10 }
-		},
-		cheer = {
-			{ id = "http://www.roblox.com/asset/?id=12521021991", weight = 10 }
-		},
-	}
+	local animNames = {
+  idle = {
+   { id = "http://www.roblox.com/asset/?id=180435571", weight = 9 },
+   { id = "http://www.roblox.com/asset/?id=180435792", weight = 1 } 
+  },
+  walk = {
+   { id = "http://www.roblox.com/asset/?id=180426354", weight = 10 }
+  },
+  run = {
+   { id = "http://www.roblox.com/asset/?id=180426354", weight = 10 }
+  },
+  climb = {
+   { id = "http://www.roblox.com/asset/?id=180436334", weight = 10 }
+  },
+  sit = {
+   { id = "http://www.roblox.com/asset/?id=178130996", weight = 10 }
+  },
+  toolnone = {
+   { id = "http://www.roblox.com/asset/?id=182393478", weight = 10 }
+  },
+  toolslash = {
+   { id = "http://www.roblox.com/asset/?id=129967390", weight = 10 }
+  },
+  toollunge = {
+   { id = "http://www.roblox.com/asset/?id=129967478", weight = 10 }
+  },
+  wave = {
+   { id = "http://www.roblox.com/asset/?id=128777973", weight = 10 }
+  },
+  point = {
+   { id = "http://www.roblox.com/asset/?id=128853357", weight = 10 }
+  },
+  dance1 = {
+   { id = "http://www.roblox.com/asset/?id=182435998", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491037", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491065", weight = 10 }
+  },
+  dance2 = {
+   { id = "http://www.roblox.com/asset/?id=182436842", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491248", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491277", weight = 10 }
+  },
+  dance3 = {
+   { id = "http://www.roblox.com/asset/?id=182436935", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491368", weight = 10 },
+   { id = "http://www.roblox.com/asset/?id=182491423", weight = 10 }
+  },
+  laugh = {
+   { id = "http://www.roblox.com/asset/?id=129423131", weight = 10 }
+  },
+  cheer = {
+   { id = "http://www.roblox.com/asset/?id=129423030", weight = 10 }
+  },
+ }
 
 
 	local strafingLocomotionMap = {}
