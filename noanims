@@ -1,0 +1,108 @@
+-- No-Anims Script
+
+local StarterGui = game:GetService("StarterGui")
+local ScreenGui = Instance.new("ScreenGui")
+local NoAnimsButton = Instance.new("TextButton")
+local StopButton = Instance.new("TextButton")
+
+local buttonIsOn = false
+
+function Notify(Txt, Dur)
+    StarterGui:SetCore("SendNotification", {
+        Title = "Made by @fam_real",
+        Text = Txt,
+        Duration = Dur
+    })
+end
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+NoAnimsButton.Name = "NoAnimsButton"
+NoAnimsButton.Parent = ScreenGui
+NoAnimsButton.BackgroundColor3 = Color3.new(1, 0, 0)
+NoAnimsButton.BorderColor3 = Color3.new(0, 0, 0)
+NoAnimsButton.Position = UDim2.new(0.912970064, 0, 0.194202876, 0)
+NoAnimsButton.Size = UDim2.new(0, 40, 0, 40)
+NoAnimsButton.Font = Enum.Font.Code
+NoAnimsButton.Text = "No-Anims"
+NoAnimsButton.TextColor3 = Color3.new(0, 0, 0)
+NoAnimsButton.TextSize = 14
+NoAnimsButton.TextStrokeColor3 = Color3.new(1, 1, 1)
+NoAnimsButton.TextWrapped = true
+NoAnimsButton.Active = true
+NoAnimsButton.Draggable = true
+
+StopButton.Name = "StopButton"
+StopButton.Parent = NoAnimsButton
+StopButton.BackgroundColor3 = Color3.new(1, 1, 1)
+StopButton.BorderColor3 = Color3.new(0, 0, 0)
+StopButton.Position = UDim2.new(-1.116970064, 0, 0.004202876, 0)
+StopButton.Size = UDim2.new(0, 40, 0, 40)
+StopButton.Font = Enum.Font.Code
+StopButton.Text = "❌"
+StopButton.TextColor3 = Color3.new(1, 0, 0)
+StopButton.TextSize = 30
+StopButton.TextStrokeColor3 = Color3.new(0, 0, 0)
+StopButton.TextWrapped = true
+
+local function StopScript()
+    ScreenGui:Destroy()
+end
+
+local function noanimations()
+    local c = game.Players.LocalPlayer.Character
+    if c and c.Parent then
+        local hum = c:FindFirstChildOfClass("Humanoid")
+        if hum then
+            local animate = c:FindFirstChild("Animate")
+            if animate then
+                animate.Disabled = true
+            end
+            for i, v in pairs(hum:GetPlayingAnimationTracks()) do
+                v:Stop()
+            end
+        else
+            Notify("Humanoid not found", 3)
+        end
+    else
+        Notify("Character not found", 3)
+    end
+end
+
+local function ToggleButton()
+    buttonIsOn = not buttonIsOn
+
+    if buttonIsOn then
+        NoAnimsButton.BackgroundColor3 = Color3.new(0, 1, 0)
+
+        noanimations()
+    else
+        NoAnimsButton.BackgroundColor3 = Color3.new(1, 0, 0)
+
+        local c = game.Players.LocalPlayer.Character
+        if c then
+            local animate = c:FindFirstChild("Animate")
+            if animate then
+                animate.Disabled = false
+                for _, v in pairs(c:GetChildren()) do
+                    if v:IsA("Animation") then
+                        v:PlayAnimation()
+                    end
+                end
+            else
+                Notify("Animate not found", 3)
+            end
+        else
+            Notify("Character not found", 3)
+        end
+    end
+end
+
+NoAnimsButton.TouchTap:Connect(function()
+    ToggleButton()
+end)
+
+StopButton.TouchTap:Connect(function()
+    StopScript()
+end)
