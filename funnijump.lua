@@ -3,7 +3,7 @@ local player = game.Players.LocalPlayer
 local function onCharacterAdded(character)
     local humanoid = character:WaitForChild("Humanoid")
     local groundSpeed = 24
-    local airSpeed = 50
+    local airSpeed = 38
 
     humanoid.WalkSpeed = groundSpeed -- Set the initial ground speed here.
 
