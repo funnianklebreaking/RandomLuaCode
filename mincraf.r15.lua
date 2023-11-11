@@ -57,9 +57,6 @@ function RunCustomAnimation(Char)
 		run = 	{
 			{ id = "http://www.roblox.com/asset/?id=12518152696", weight = 10 } 
 		},
-		climb = {
-			{ id = "http://www.roblox.com/asset/?id=12520982150", weight = 10 }
-		},
 		sit = 	{
 			{ id = "http://www.roblox.com/asset/?id=12520993168", weight = 10 }
 		},
@@ -68,10 +65,7 @@ function RunCustomAnimation(Char)
 		},
 		toolslash = {
 			{ id = "http://www.roblox.com/asset/?id=12520999032", weight = 10 }
-		},
-		toollunge = {
-			{ id = "http://www.roblox.com/asset/?id=12521002003", weight = 10 }
-		},
+		}, -- here does toollunge
 		wave = {
 			{ id = "http://www.roblox.com/asset/?id=12521004586", weight = 10 }
 		},
@@ -722,10 +716,6 @@ function RunCustomAnimation(Char)
 	end
 
 	function onClimbing(speed)
-		local scale = 5.0
-		playAnimation("climb", 0.1, Humanoid)
-		setAnimationSpeed(speed / scale)
-		pose = "Climbing"
 	end
 
 	function onGettingUp()
