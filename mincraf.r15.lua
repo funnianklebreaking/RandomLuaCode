@@ -756,11 +756,6 @@ function RunCustomAnimation(Char)
 	end
 
 	function animateTool()
-		if (toolAnim == "None") then
-			playToolAnimation("toolnone", toolTransitionTime, Humanoid, Enum.AnimationPriority.Idle)
-			return
-		end
-
 		if (toolAnim == "Slash") then
 			playToolAnimation("toolslash", 0, Humanoid, Enum.AnimationPriority.Action)
 			return
