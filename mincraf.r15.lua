@@ -64,7 +64,7 @@ function RunCustomAnimation(Char)
 			{ id = "http://www.roblox.com/asset/?id=12520993168", weight = 10 }
 		},
 		toolnone = {
-			{ id = "http://www.roblox.com/asset/?id=12520996634", weight = 10 }
+			{ id = "http://www.roblox.com/asset/?id=12521158637", weight = 10 }
 		},
 		toolslash = {
 			{ id = "http://www.roblox.com/asset/?id=12520999032", weight = 10 }
