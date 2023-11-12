@@ -6,6 +6,9 @@ local function onCharacterAdded(character)
     local airSpeed = 38
 
     humanoid.WalkSpeed = groundSpeed -- Set the initial ground speed here.
+    humanoid.Sit = true
+    wait(0.25)
+    humanoid.Jump = true
 
     local function onStateChanged(oldState, newState)
         if newState == Enum.HumanoidStateType.Jumping or newState == Enum.HumanoidStateType.Freefall then
