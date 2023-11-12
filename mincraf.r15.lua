@@ -898,7 +898,3 @@ plr.CharacterAdded:Connect(function(Char)
 	RunCustomAnimation(Char)
 end)
 loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/randomluacode/main/funnijump.lua"))()
-humanoid.Sit = true
-wait(0.5)
-humanoid.Jump = true
-end)
