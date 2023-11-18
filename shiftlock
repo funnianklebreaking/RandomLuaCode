@@ -83,7 +83,6 @@ local function TLQOYN_fake_script() -- ImageButton.ShiftGUI
 		end
 
 		if game:GetService("Workspace").CurrentCamera then
-			if IsInFirstPerson then
 				game:GetService("Workspace").CurrentCamera.CFrame = camera.CFrame * ENABLED_OFFSET
 			end
 		end
