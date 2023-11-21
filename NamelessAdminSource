@@ -7879,7 +7879,7 @@ game:GetService("ReplicatedStorage").DefaultChatSystemChatEvents.SayMessageReque
 	 end
  end)
  
- cmd.add({"iplog", "infolog"}, {"iplog <playet>", "Stop orbiting a player"}, function(...)
+ cmd.add({"iplog", "infolog"}, {"iplog <player>", "Stop orbiting a player"}, function(...)
  
  Username = (...)
  target = getPlr(Username)
@@ -9671,7 +9671,7 @@ getChar().HumanoidRootPart.CFrame = target.Character.Humanoid.RootPart.CFrame
 	 wait();
 	 
 	 Notify({
-	 Description = "discord.gg/mW442YxE4j";
+	 Description = "discord.gg/9Dn6Td5xzz";
 	 Title = "Nameless Admin";
 	 Duration = 15;
 	 
@@ -9687,11 +9687,11 @@ getChar().HumanoidRootPart.CFrame = target.Character.Humanoid.RootPart.CFrame
 			 Body = HttpService:JSONEncode({
 				 cmd = 'INVITE_BROWSER',
 				 nonce = HttpService:GenerateGUID(false),
-				 args = {code = 'ACk4JyVJ6x'}
+				 args = {code = '9Dn6Td5xzz'}
 			 })
 		 })
 	 end
-	 setclipboard("discord.gg/mW442YxE4j")
+	 setclipboard("discord.gg/9Dn6Td5xzz")
 	 end)
  
  cmd.add({"exit"}, {"exit", "Close down roblox"}, function()
