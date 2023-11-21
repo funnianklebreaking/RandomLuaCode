@@ -1,0 +1,9 @@
+local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/notificationtest"))();
+local Notify = Notification.Notify;
+
+ Notify({
+		 Description = "Nameless Admin has been discontinued, this is an unofficial version, for more info, join the discord server. (sorry ill remove this message in a month)";
+		 Title = "Message from Captain Cheese";
+		 Duration = 20;
+		 
+});
