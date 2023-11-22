@@ -4,6 +4,6 @@ local Notify = Notification.Notify;
  Notify({
 		 Description = "This is an unofficial version discord.gg/9Dn6Td5xzz";
 		 Title = "Message from Captain Cheese";
-		 Duration = 20;
+		 Duration = 10;
 		 
 });
