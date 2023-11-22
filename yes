@@ -2,7 +2,7 @@ local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/
 local Notify = Notification.Notify;
 
  Notify({
-		 Description = "Nameless Admin has been discontinued, this is an unofficial version, for more info, join the discord server. (sorry ill remove this message in a month)";
+		 Description = "This is an unofficial version discord.gg/9Dn6Td5xzz";
 		 Title = "Message from Captain Cheese";
 		 Duration = 20;
 		 
