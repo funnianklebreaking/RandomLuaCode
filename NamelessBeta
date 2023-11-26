@@ -15138,9 +15138,9 @@ end
  ImageLabel.Position = UDim2.new(0.25, 0, 0.25, 0)
  ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5
  ImageLabel.ScaleType = Enum.ScaleType.Fit
- ImageLabel.Image = "rbxassetid://123456"
+ ImageLabel.Image = "rbxassetid://15472006288"
  
- local function PZORYLB_fake_script() -- TextClickButton.LocalScript 
+ local function PZORYLB_fake_script()
 	 local script = Instance.new('LocalScript', TextClickButton)
 	 textclickbutton = script.Parent
 	 textclickbutton.Size = UDim2.new(0, 2,0, 33)
