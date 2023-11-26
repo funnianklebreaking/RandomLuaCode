@@ -15133,8 +15133,8 @@ end
  
  ImageLabel.Parent = TextClickButton
  ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
- ImageLabel.BackgroundTransparency = 0.25
- ImageLabel.Size = UDim2.new(0.5, 0, 0.5, 0)
+ ImageLabel.BackgroundTransparency = 1
+ ImageLabel.Size = UDim2.new(1, 0, 1, 0)
  ImageLabel.Position = UDim2.new(0.25, 0, 0.25, 0)
  ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
  ImageLabel.ScaleType = Enum.ScaleType.Fit
