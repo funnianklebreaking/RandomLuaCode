@@ -14606,32 +14606,32 @@ end)
 
 
  cmd.add({"dropbutton", "db"}, {"Dropbutton (DB)", "Creates a button to drop tools on mobile lol"}, function()
-	 local StarterGui = game:GetService("StarterGui")
-local ScreenGui = Instance.new("ScreenGui")
-local DropButton = Instance.new("TextButton")
+	local StarterGui = game:GetService("StarterGui")
+	local ScreenGui = Instance.new("ScreenGui")
+	local DropButton = Instance.new("TextButton")
 
-ScreenGui.Parent = game:GetService("CoreGui")
-ScreenGui.ResetOnSpawn = false
+	ScreenGui.Parent = game:GetService("CoreGui")
+	ScreenGui.ResetOnSpawn = false
 
-DropButton.Name = "DropButton"
-DropButton.Parent = ScreenGui
-DropButton.BackgroundColor3 = Color3.new(1, 0, 0)
-DropButton.BorderColor3 = Color3.new(0, 0, 0)
-DropButton.Position = UDim2.new(0.912970064, 0, 0.194202876, 0)
-DropButton.Size = UDim2.new(0, 50, 0, 20)
-DropButton.Font = Enum.Font.Code
-DropButton.Text = "Drop Tool"
-DropButton.TextColor3 = Color3.new(0, 0, 0)
-DropButton.TextSize = 14
-DropButton.TextStrokeColor3 = Color3.new(1, 1, 1)
-DropButton.TextWrapped = true
-DropButton.Transparency = 0.2
-DropButton.Active = true
-DropButton.Draggable = true
+	DropButton.Name = "DropButton"
+	DropButton.Parent = ScreenGui
+	DropButton.BackgroundColor3 = Color3.new(1, 0, 0)
+	DropButton.BorderColor3 = Color3.new(0, 0, 0)
+	DropButton.Position = UDim2.new(0.912970064, 0, 0.194202876, 0)
+	DropButton.Size = UDim2.new(0, 50, 0, 30)
+	DropButton.Font = Enum.Font.Code
+	DropButton.Text = "Drop"
+	DropButton.TextColor3 = Color3.new(0, 0, 0)
+	DropButton.TextSize = 16
+	DropButton.TextStrokeColor3 = Color3.new(1, 1, 1)
+	DropButton.TextWrapped = true
+	DropButton.Transparency = 0.2
+	DropButton.Active = true
+	DropButton.Draggable = true
 
-DropButton.MouseButton1Click:Connect(function()
-game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
-end)
+	DropButton.MouseButton1Click:Connect(function()
+	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
+	end)
  end)
  
  
