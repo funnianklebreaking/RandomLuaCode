@@ -14603,6 +14603,36 @@ end)
 			end
 	 end
  end)
+
+
+ cmd.add({"dropbutton", "db"}, {"Dropbutton (DB)", "Creates a button to drop tools on mobile lol"}, function()
+	 local StarterGui = game:GetService("StarterGui")
+local ScreenGui = Instance.new("ScreenGui")
+local DropButton = Instance.new("TextButton")
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+DropButton.Name = "DropButton"
+DropButton.Parent = ScreenGui
+DropButton.BackgroundColor3 = Color3.new(1, 0, 0)
+DropButton.BorderColor3 = Color3.new(0, 0, 0)
+DropButton.Position = UDim2.new(0.912970064, 0, 0.194202876, 0)
+DropButton.Size = UDim2.new(0, 50, 0, 20)
+DropButton.Font = Enum.Font.Code
+DropButton.Text = "Drop Tool"
+DropButton.TextColor3 = Color3.new(0, 0, 0)
+DropButton.TextSize = 14
+DropButton.TextStrokeColor3 = Color3.new(1, 1, 1)
+DropButton.TextWrapped = true
+DropButton.Transparency = 0.2
+DropButton.Active = true
+DropButton.Draggable = true
+
+DropButton.MouseButton1Click:Connect(function()
+game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
+end)
+ end)
  
  
  -- [[ PLUGIN LOADER ]] -- 
@@ -15130,15 +15160,6 @@ end
  
  UICorner.CornerRadius = UDim.new(1, 0)
  UICorner.Parent = TextClickButton
- 
- ImageLabel.Parent = TextClickButton
- ImageLabel.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
- ImageLabel.BackgroundTransparency = 1
- ImageLabel.Size = UDim2.new(1, 0, 1, 0)
- ImageLabel.Position = UDim2.new(0.25, 0, 0.25, 0)
- ImageLabel.AnchorPoint = Vector2.new(0.5, 0.5)
- ImageLabel.ScaleType = Enum.ScaleType.Fit
- ImageLabel.Image = "rbxassetid://15472006288"
  
  local function PZORYLB_fake_script()
 	 local script = Instance.new('LocalScript', TextClickButton)
