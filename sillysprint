@@ -1,0 +1,56 @@
+local Players = game:GetService("Players")
+local player = Players.LocalPlayer
+local humanoid = player.Character:FindFirstChildOfClass ("Humanoid")
+
+local StarterGui = game:GetService("StarterGui")
+local ScreenGui = Instance.new("ScreenGui")
+local Frame = Instance.new("TextButton")
+local RunButton = Instance.new("TextButton")
+
+local runToggle = false
+
+ScreenGui.Parent = game:GetService("CoreGui")
+ScreenGui.ResetOnSpawn = false
+
+Frame.Name = "Frame"
+Frame.Parent = ScreenGui
+Frame.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+Frame.BorderColor3 = Color3.new(0, 0, 0)
+Frame.Position = UDim2.new(0.893773064, 0, 0.453002876, 0)
+Frame.Size = UDim2.new(0, 58, 0, 20)
+Frame.Font = Enum.Font.Code
+Frame.Text = "Drag :3"
+Frame.TextColor3 = Color3.new(1, 1, 1)
+Frame.TextSize = 15
+Frame.TextWrapped = true
+Frame.Transparency = 0.5
+Frame.Draggable = true
+
+RunButton.Name = "RunButton"
+RunButton.Parent = Frame
+RunButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
+RunButton.BorderColor3 = Color3.new(0, 0, 0)
+RunButton.Position = UDim2.new(0.8, -46.8459, 1, 4)
+RunButton.Size = UDim2.new(0, 58, 0, 58)
+RunButton.Font = Enum.Font.Code
+RunButton.Text = "Sprint"
+RunButton.TextColor3 = Color3.new(1, 1, 1)
+RunButton.TextSize = 15
+RunButton.TextWrapped = true
+RunButton.Transparency = 0.5
+RunButton.Active = true
+
+local function ToggleButton()
+    runToggle = not runToggle
+    if runToggle then
+        RunButton.Text = "Running"
+        humanoid.WalkSpeed = 27
+    else
+        RunButton.Text = "Walking"
+        humanoid.WalkSpeed = 16
+    end
+end
+
+RunButton.MouseButton1Click:Connect(function()
+ToggleButton()
+end)
