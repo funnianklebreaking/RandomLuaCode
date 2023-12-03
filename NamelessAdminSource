@@ -21,9 +21,9 @@
  local Notify = Notification.Notify;
 
  Notify({
-		 Description = "Nameless Admin is now discontinued as i have decided to step away from exploiting since i only used it to learn scripting in a more 'fun' way. Thank you all for everything :^)";
-		 Title = "Goodbye!";
-		 Duration = 10;
+		 Description = "This is an unofficial version, discord.gg/9Dn6Td5xzz";
+		 Title = "Message from Captain Cheese";
+		 Duration = 5;
 		 
 });
  
@@ -9678,7 +9678,7 @@ getChar().HumanoidRootPart.CFrame = target.Character.Humanoid.RootPart.CFrame
 	 wait();
 	 
 	 Notify({
-	 Description = "discord.gg/mW442YxE4j";
+	 Description = "discord.gg/9Dn6Td5xzz";
 	 Title = "Nameless Admin";
 	 Duration = 15;
 	 
@@ -9694,11 +9694,11 @@ getChar().HumanoidRootPart.CFrame = target.Character.Humanoid.RootPart.CFrame
 			 Body = HttpService:JSONEncode({
 				 cmd = 'INVITE_BROWSER',
 				 nonce = HttpService:GenerateGUID(false),
-				 args = {code = 'ACk4JyVJ6x'}
+				 args = {code = '9Dn6Td5xzz}
 			 })
 		 })
 	 end
-	 setclipboard("discord.gg/mW442YxE4j")
+	 setclipboard("discord.gg/9Dn6Td5xzz")
 	 end)
  
  cmd.add({"exit"}, {"exit", "Close down roblox"}, function()
@@ -15162,5 +15162,5 @@ end
  --[[
 	End of the source code.
 	Join the discord for updates or give command ideas, that could be added.
-	https://discord.gg/ACk4JyVJ6x
+	https://discord.gg/9Dn6Td5xzz
 --]]
