@@ -1,9 +1,0 @@
-local Notification = loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/notificationtest"))();
-local Notify = Notification.Notify;
-
- Notify({
-		 Description = "This is an unofficial version discord.gg/9Dn6Td5xzz";
-		 Title = "Message from Captain Cheese";
-		 Duration = 10;
-		 
-});
