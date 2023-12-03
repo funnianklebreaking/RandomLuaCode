@@ -10,8 +10,6 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("TextButton")
 local SlideButton = Instance.new("TextButton")
 
--- check if _G.SlideCondition is a boolean value, otherwise use true as default
-local SlideCondition = type(_G.SlideCondition) == "boolean" and _G.SlideCondition or true
 -- check if _G.SlideSpeed is a number value, otherwise use 30 as default
 local SlideSpeed = type(_G.SlideSpeed) == "number" and _G.SlideSpeed or 30
 -- check if _G.SmoothRun is a boolean value, otherwise use false as default
