@@ -14633,7 +14633,10 @@ end)
 	game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
 	end)
  end)
- 
+
+ cmd.add({"mobilelock", "mlock", "ml"}, {"mobilelock", "Shiftlock for mobile"}, function()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/RandomLuaCode/main/Shiftlock"))()
+ end)
  
  -- [[ PLUGIN LOADER ]] -- 
  local PluginsLoaded = 0
