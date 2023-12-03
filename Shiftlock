@@ -1,12 +1,15 @@
 -- Instances:
 
+local ScreenGui = Instance.new("ScreenGui")
 local ShiftlockStarterGui = Instance.new("ScreenGui")
 local ImageButton = Instance.new("ImageButton")
 
 --Properties:
 
+ScreenGui.Parent = game:GetService("CoreGui")
+
 ShiftlockStarterGui.Name = "Shiftlock (StarterGui)"
-ShiftlockStarterGui.Parent = game.Players.LocalPlayer:WaitForChild("CoreGui")
+ShiftlockStarterGui.Parent = ScreenGui
 ShiftlockStarterGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
 
 ImageButton.Parent = ShiftlockStarterGui
