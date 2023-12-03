@@ -10,10 +10,7 @@ local ScreenGui = Instance.new("ScreenGui")
 local Frame = Instance.new("TextButton")
 local SlideButton = Instance.new("TextButton")
 
--- check if _G.SlideSpeed is a number value, otherwise use 30 as default
-local SlideSpeed = type(_G.SlideSpeed) == "number" and _G.SlideSpeed or 30
--- check if _G.SmoothRun is a boolean value, otherwise use false as default
-local SmoothRun = type(_G.SmoothRun) == "boolean" and _G.SmoothRun or false
+local SlideSpeed = type(_G.SlideSpeed) == "number" and _G.SlideSpeed or 75
 
 ScreenGui.Parent = game:GetService("CoreGui")
 ScreenGui.ResetOnSpawn = false
@@ -44,21 +41,25 @@ SlideButton.TextColor3 = Color3.new(1, 1, 1)
 SlideButton.TextSize = 15
 SlideButton.TextWrapped = true
 SlideButton.Transparency = 0.5
-SlideButton.Active = true
+SlideButton.Active = false
+
+local sliding = false
 
 local function slide()
+    if sliding then return end
+    sliding = true
     local slideAnimation = Instance.new("Animation")
     slideAnimation.AnimationId = "rbxassetid://282574440"
     local slideTrack = Humanoid:LoadAnimation(slideAnimation)
     local slideDirection = Char.HumanoidRootPart.CFrame.LookVector
-    local slideVelocity = SlideSpeed * slideDirection
-    local sliding = true
+    local slideVelocity = slideDirection * SlideSpeed
+    local slideStop = Vector3.new(0, 0, 0)
     SlideButton.Text = "Sliding"
     SlideButton.Active = false
     slideTrack:Play()
     Humanoid.WalkSpeed = 0
     Char.HumanoidRootPart.Velocity = slideVelocity
-    local slideTween = TweenService:Create(Char.HumanoidRootPart, TweenInfo.new(5, Enum.EasingStyle.Linear, Enum.EasingDirection.Out), {Velocity = Vector3.new(0, 0, 0)})
+    local slideTween = TweenService:Create(Char.HumanoidRootPart, TweenInfo.new(3, Enum.EasingStyle.Sine, Enum.EasingDirection.Out), {Velocity = slideStop})
     slideTween:Play()
     slideTween.Completed:Connect(function()
         sliding = false
@@ -70,7 +71,7 @@ local function slide()
     while sliding do
         wait()
         local state = Humanoid:GetState()
-        if state == Enum.HumanoidStateType.Jumping then
+        if state == Enum.HumanoidStateType.Jumping or state == Enum.HumanoidStateType.Freefall then
             sliding = false
             slideTween:Cancel()
             slideTrack:Stop()
@@ -82,28 +83,14 @@ local function slide()
 end
 
 SlideButton.MouseButton1Click:Connect(function()
-slide()
+    if not sliding then
+        slide()
+    end
 end)
 
--- check the value of _G.SmoothRun before calling the function
-if SmoothRun then
-    local function HandleWalkSpeed(Char)
-        local Humanoid = Char:WaitForChild("Humanoid")
-        Humanoid.WalkSpeed = 0.1
-        Humanoid:GetPropertyChangedSignal("MoveDirection"):Connect(function()		if Humanoid.MoveDirection == Vector3.new(0,0,0) then
-                Humanoid.WalkSpeed = 0.1
-                if Tween then
-                    Tween:Cancel()
-                end
-                Tween = nil
-            elseif not Tween then
-                Tween = TweenService:Create(Humanoid,TweenInfo.new(0.6, Enum.EasingStyle.Linear, Enum.EasingDirection.In),{WalkSpeed = 24})
-                Tween:Play()
-            end
-        end)
-    end
+Humanoid.Died:Connect(function()
+    sliding = false
+    ScreenGui:Destroy()
+end)
 
-    if Character then
-        HandleWalkSpeed(Character)
-    end
-end
+Humanoid.WalkSpeed = 24
