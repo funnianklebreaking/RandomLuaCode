@@ -60,22 +60,38 @@ local function TLQOYN_fake_script() -- ImageButton.ShiftGUI
 		return CFrame.new(root.Position, Vector3.new(CAMERA.CFrame.LookVector.X * MAX_LENGTH, root.Position.Y, CAMERA.CFrame.LookVector.Z * MAX_LENGTH))
 	end
 	local function EnableShiftlock()
+		UpdatePos()
 		UpdateAutoRotate(false)
 		UpdateImage("ON")
-		root.CFrame = GetUpdatedCameraCFrame(root, camera)
-		camera.CFrame = camera.CFrame * ENABLED_OFFSET
+
+		if player.Character and player.Character:FindFirstChildOfClass("Humanoid") and player.Character:FindFirstChildOfClass("Humanoid").RootPart then
+			player.Character:FindFirstChildOfClass("Humanoid").RootPart.CFrame = GetUpdatedCameraCFrame()
+		end
+
+		if game:GetService("Workspace").CurrentCamera then
+				game:GetService("Workspace").CurrentCamera.CFrame = camera.CFrame * ENABLED_OFFSET
+			end
+		end
 	end
+
 	local function DisableShiftlock()
+		UpdatePos()
 		UpdateAutoRotate(true)
 		UpdateImage("OFF")
-		camera.CFrame = camera.CFrame * DISABLED_OFFSET
+
+		if game:GetService("Workspace").CurrentCamera then
+			game:GetService("Workspace").CurrentCamera.CFrame = camera.CFrame * DISABLED_OFFSET
+		end
+
 		pcall(function()
 			active:Disconnect()
 			active = nil
 		end)
 	end
+
 	UpdateImage("OFF")
 	active = false
+
 	function ShiftLock()
 		if not active then
 			active = runservice.RenderStepped:Connect(function()
