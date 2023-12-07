@@ -53,12 +53,28 @@ local function TLQOYN_fake_script() -- ImageButton.ShiftGUI
 	local function UpdateImage(STATE)
 		button.Image = states[STATE]
 	end
+local function UpdatePos()
+		if player.Character and player.Character:FindFirstChildOfClass("Humanoid") and player.Character:FindFirstChildOfClass("Humanoid").RootPart then
+			rootPos = player.Character:FindFirstChildOfClass("Humanoid").RootPart.Position
+		end
+	end
+
+	local function UpdateImage(STATE)
+		button.Image = states[STATE]
+	end
+
 	local function UpdateAutoRotate(BOOL)
-		humanoid.AutoRotate = BOOL
+		if player.Character and player.Character:FindFirstChildOfClass("Humanoid") then
+			player.Character:FindFirstChildOfClass("Humanoid").AutoRotate = BOOL
+		end
 	end
-	local function GetUpdatedCameraCFrame(ROOT, CAMERA)
-		return CFrame.new(root.Position, Vector3.new(CAMERA.CFrame.LookVector.X * MAX_LENGTH, root.Position.Y, CAMERA.CFrame.LookVector.Z * MAX_LENGTH))
+
+	local function GetUpdatedCameraCFrame()
+		if game:GetService("Workspace").CurrentCamera then
+			return CFrame.new(rootPos, Vector3.new(game:GetService("Workspace").CurrentCamera.CFrame.LookVector.X * MAX_LENGTH, rootPos.Y, game:GetService("Workspace").CurrentCamera.CFrame.LookVector.Z * MAX_LENGTH))
+		end
 	end
+
 	local function EnableShiftlock()
 		UpdatePos()
 		UpdateAutoRotate(false)
@@ -88,10 +104,8 @@ local function TLQOYN_fake_script() -- ImageButton.ShiftGUI
 			active = nil
 		end)
 	end
-
-	UpdateImage("OFF")
-	active = false
-
+        UpdateImage("OFF")
+        active = false
 	function ShiftLock()
 		if not active then
 			active = runservice.RenderStepped:Connect(function()
