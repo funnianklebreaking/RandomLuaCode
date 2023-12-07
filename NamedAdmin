@@ -14611,8 +14611,8 @@ end)
 	 end
  end)
  
- cmd.add({"mobilelock", "mlock"}, {"mobilelock", "Shift lock for mobile yay."}, function()
-	 loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/RandomLuaCode/main/Shiftlock"))()
+ cmd.add({"mobilelock", "mlock"}, {"mobilelock", "Shift lock for mobile yay"}, function()
+ loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/RandomLuaCode/main/Shiftlock"))()
  end)
  
  cmd.add({"dropbutton", "db"}, {"dropbutton", "Drop button for mobile"}, function()
@@ -14628,11 +14628,11 @@ end)
    DropButton.BackgroundColor3 = Color3.new(1, 0, 0)
    DropButton.BorderColor3 = Color3.new(0, 0, 0)
    DropButton.Position = UDim2.new(0.912970064, 0, 0.194202876, 0)
-   DropButton.Size = UDim2.new(0, 50, 0, 20)
+   DropButton.Size = UDim2.new(0, 60, 0, 30)
    DropButton.Font = Enum.Font.Code
-   DropButton.Text = "Drop Tool"
+   DropButton.Text = "Drop"
    DropButton.TextColor3 = Color3.new(0, 0, 0)
-   DropButton.TextSize = 14
+   DropButton.TextSize = 16
    DropButton.TextStrokeColor3 = Color3.new(1, 1, 1)
    DropButton.TextWrapped = true
    DropButton.Transparency = 0.2
