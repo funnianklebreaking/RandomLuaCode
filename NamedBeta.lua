@@ -8964,7 +8964,7 @@ end
 	if TCharacter:FindFirstChildOfClass("Accessory") then
 		Accessory = TCharacter:FindFirstChildOfClass("Accessory")
 	end
-	if Accessoy and Accessory:FindFirstChild("Handle") then
+	if Accessory and Accessory:FindFirstChild("Handle") then
 		Handle = Accessory.Handle
 	end
  
