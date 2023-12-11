@@ -9055,7 +9055,8 @@ print(Time)
                     end
                 until BasePart.Velocity.Magnitude > 500 or BasePart.Parent == TargetPlayer.Character or not TargetPlayer.Character == TCharacter or THumanoid.Sit or Humanoid.Health <= 0 or tick() > Time + TimeToWait
             end
-
+				
+            local previousDestroyHeight = workspace.FallenPartsDestroyHeight
             workspace.FallenPartsDestroyHeight = 0/0
 
             local BV = Instance.new("BodyVelocity")
@@ -9096,7 +9097,7 @@ print(Time)
                 end)
                 task.wait()
             until (RootPart.Position - getgenv().OldPos.p).Magnitude < 25
-            workspace.FallenPartsDestroyHeight = getgenv().FPDH
+            workspace.FallenPartsDestroyHeight = previousDestroyHeight
         else
         end
     end
