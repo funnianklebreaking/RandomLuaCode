@@ -14869,6 +14869,13 @@ local function OMQRQRC_fake_script()
 	
 end
 coroutine.wrap(OMQRQRC_fake_script)()
+ Notify({
+		 Description = "Mobile Lock Enabled!";
+		 Title = "Named Admin";
+		 Duration = 5;
+		 
+});
+
  end)
  
  cmd.add({"dropbutton", "db"}, {"dropbutton", "Drop button for mobile"}, function()
