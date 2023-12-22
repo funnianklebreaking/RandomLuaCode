@@ -1,0 +1,67 @@
+local player = game:GetService("Players").LocalPlayer
+local args = 14
+
+local function isNumber(n)
+	return tonumber(n) ~= nil
+end
+
+local function WalkSpeedChange()
+	local speed = args or 14
+	if isNumber(speed) then
+		local Char = player.Character or workspace:FindFirstChild(player.Name)
+		local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+		if Char and Human then
+			Human.WalkSpeed = speed
+		end
+	end
+end
+
+local Char = player.Character or workspace:FindFirstChild(player.Name)
+local Human = Char and Char:FindFirstChildWhichIsA("Humanoid")
+
+local ff
+local rr
+local mincap = 14
+local speedcap = 100
+local speedloss = 5
+Human.FreeFalling:Connect(function(f)
+   ff = f
+end)
+Human.Running:Connect(function(r)
+   rr = r
+end)
+-- That good shit
+while wait() do
+	if ff == true then
+		if rr > 6 then
+			local velocity = nil
+			local dir = nil
+			if Vector2.new(GetNewRootPart.Velocity.X, Char.HumanoidRootPart.Velocity.Z).Magnitude > 0 then
+				velocity = Vector2.new(Char.HumanoidRootPart.Velocity.X, Char.HumanoidRootPart.Velocity.Z).Unit
+			else
+				velocity = Vector2.new(0,0)
+			end
+			dir = Vector2.new(Char.HumanoidRootPart.CFrame.lookVector.X, Char.HumanoidRootPart.CFrame.lookVector.Z).Unit
+			local num  = (velocity-dir).Magnitude+.8
+			if math.floor(num) == 1 and num < 1.5 then
+				args = args + (num - 1) * 4
+				if args > speedcap then
+					args = speedcap
+				end
+			end
+		else
+			args = args - speedloss
+			if args < mincap then
+				args = mincap
+			end
+		end
+	else
+		if not Human.Jump then
+			args = args - speedloss
+			if args < mincap then
+				args = mincap
+			end
+		end
+	end
+	WalkSpeedChange()
+end
