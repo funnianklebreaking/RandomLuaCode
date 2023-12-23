@@ -14907,8 +14907,7 @@ coroutine.wrap(OMQRQRC_fake_script)()
    end)
  end)
 
-cmd.add({"swordbot", "sbot"}, {"swordbot", "become a freaking bot while holding a sword."}, function(...)
-local AttackRange = tonumber(...) or 15
+cmd.add({"swordbot", "sbot"}, {"swordbot", "become a freaking bot while holding a sword."}, function()
 getgenv().i_said_right_foot_creep = true
 holyfreakingswordbot = true
 
@@ -14921,7 +14920,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
                 local p = game.Players:GetPlayers()
                 for i = 2, #p do
                     local v = p[i].Character
-                    if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:DistanceFromCharacter(v.HumanoidRootPart.Position) <= AttackRange then
+                    if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:DistanceFromCharacter(v.HumanoidRootPart.Position) <= 15 then
                         for i, v in next, v:GetChildren() do
                             if v:IsA("BasePart") then
                                 firetouchinterest(tool.Handle, v, 0)
@@ -14977,7 +14976,7 @@ while true do
         else
             getgenv().executed = true
             spawn(function()
-                getgenv().i_said_right_foot_creep = false
+                getgenv().i_said_right_foot_creep = true
                 getgenv().ssss = game.Players.LocalPlayer:GetMouse()
                 local function freakingswordtoggle()
                     holyfreakingswordbot = not holyfreakingswordbot
@@ -15014,13 +15013,8 @@ humanoid:SetStateEnabled(stateType.Ragdoll, false)
 end)
 
  cmd.add({"noswordbot", "nosbot", "unswordbot", "unsbot"}, {"unswordbot/noswordbot", "stop the bot yeaaaaa....?"}, function()
-local function StopTheSillySwordScriptAndIGotALongNameForThisFunction()
-    if holyfreakingswordbot == true then
-        freakingswordtoggle()
-    else
-    end
-end
-StopTheSillySwordScriptAndIGotALongNameForThisFunction()
+getgenv().i_said_right_foot_creep = false
+holyfreakingswordbot = false
 end)
  
  -- [[ PLUGIN LOADER ]] -- 
