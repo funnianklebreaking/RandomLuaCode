@@ -15027,7 +15027,7 @@ humanoid:SetStateEnabled(stateType.Ragdoll, false)
 if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then 
 	wait();
 	Notify({
-	Description = "Named Admin has detected you using mobile you now have a button lmao";
+	Description = "Named Admin has detected you using mobile you now have a toggle button.";
 	Title = "Named Admin";
 	Duration = 5;
 	});
@@ -15048,7 +15048,7 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
     TextButton.Position = UDim2.new(0.933, 0,0.621, 0)
     TextButton.Size = UDim2.new(0.043, 0,0.083, 0)
     TextButton.Font = Enum.Font.SourceSansBold
-    TextButton.Text = "X"
+    TextButton.Text = "Bot Off"
     TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
     TextButton.TextSize = 15.000
     TextButton.TextWrapped = true
