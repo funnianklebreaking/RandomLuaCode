@@ -15019,555 +15019,118 @@ holyfuckingswordbot = false
 end)
  
  
- -- [[ PLUGIN LOADER ]] -- 
- local PluginsLoaded = 0
- PluginsErrored = 0
+ -- [[ PLUGIN LOADER ]] --cmd.add({"swordbot", "sbot"}, {"swordbot", "become a freaking bot while holding a sword."}, function(...)
+local AttackRange = tonumber(...) or 15
+getgenv().i_said_right_foot_creep = true
+holyfreakingswordbot = true
 
- if CustomFunctionSupport then
- local success, result = pcall(function()
-			 for i,v in pairs(listfiles("Named-Admin/Plugins")) do
-			 loadstring(readfile(listfiles("Named-Admin/Plugins")[i]))();
- PluginsLoaded = PluginsLoaded + 1
- end
- end)
- 
- if not success then
-	 PluginsErrored = PluginsErrored + 1
-	 Notify({
-		 Description = "Plugin error: " .. result .. "";
-		 Title = "Named Admin";
-		 Duration = 3;
-		 
-		 });
- end
- 
- -- [[ PLUGINS LOADED NOTIFICATION ]] --
- if PluginsErrored == 0 then
-	 Notify({
-			 Description = "Loaded " .. PluginsLoaded .. " plugins";
-			 Title = "Named Admin";
-			 Duration = 3;
-			 
-			 });
- else
-	 Notify({
-	 Description = "Loaded " .. PluginsLoaded .. " plugins, although " .. PluginsErrored .. " plugins have errored";
-	 Title = "Named Admin";
-			 Duration = 3;
-			 
-			 });
- end
- end
+game:GetService("RunService").RenderStepped:Connect(function()
+    if getgenv().i_said_right_foot_creep == true then
+        spawn(function()
+            local tool = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
+            if tool and tool:FindFirstChild("Handle") then
+                tool:Activate()
+                local p = game.Players:GetPlayers()
+                for i = 2, #p do
+                    local v = p[i].Character
+                    if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:DistanceFromCharacter(v.HumanoidRootPart.Position) <= AttackRange then
+                        for i, v in next, v:GetChildren() do
+                            if v:IsA("BasePart") then
+                                firetouchinterest(tool.Handle, v, 0)
+                                firetouchinterest(tool.Handle, v, 1)
+                            end
+                        end
+                    end
+                end
+            end
+        end)
+    end
+end)
 
- --[[ FUNCTIONALITY ]]--
- localPlayer.Chatted:Connect(function(str)
-	 lib.parseCommand(str)
- end)
- 
- -- [[ Admin Player]]
- function AdminChatted(Message, Player)
-	 Player.Chatted:Connect(function(Message, Player)
-		 lib.parseCommand(Message, Player)
-	 end)
- end
- 
- function CheckPermissions(Player)
-	 Player.Chatted:Connect(function(Message)
-		 if Admin[Player.UserId] then
-			 AdminChatted(Message, Player)
-		 end
-	 end)
- end
- Players.PlayerAdded:Connect(function(Player)
-	 CheckPermissions(Player)
- end)
- for i,v in pairs(Players:GetPlayers()) do
-	 if v ~= LocalPlayer then
-		 CheckPermissions(v)
-	 end
- end
- 
- 
- --[[ GUI VARIABLES ]]--
-local ScreenGui
- if not RunService:IsStudio() then
-	 ScreenGui = game:GetObjects("rbxassetid://13510552309")[1]
- else
-	 repeat wait() until player:FindFirstChild("AdminUI", true)
-	 ScreenGui = player:FindFirstChild("AdminUI", true)
- end
- 
- local description = ScreenGui.Description
- local cmdBar = ScreenGui.CmdBar
-	 local centerBar = cmdBar.CenterBar
-		 local cmdInput = centerBar.Input
-	 local cmdAutofill = cmdBar.Autofill
-		 local cmdExample = cmdAutofill.Cmd
-	 local leftFill = cmdBar.LeftFill
-	 local rightFill = cmdBar.RightFill
- local chatLogsFrame = ScreenGui.ChatLogs
-	 local chatLogs = chatLogsFrame.Container.Logs
-		 local chatExample = chatLogs.TextLabel
- local commandsFrame = ScreenGui.Commands
-	 local commandsFilter = commandsFrame.Container.Filter
-	 local commandsList = commandsFrame.Container.List
-		 local commandExample = commandsList.TextLabel
- local resizeFrame = ScreenGui.Resizeable
- local resizeXY = {
-	 Top		= {Vector2.new(0, -1),	Vector2.new(0, -1),	"rbxassetid://2911850935"},
-	 Bottom	= {Vector2.new(0, 1),	Vector2.new(0, 0),	"rbxassetid://2911850935"},
-	 Left	= {Vector2.new(-1, 0),	Vector2.new(1, 0),	"rbxassetid://2911851464"},
-	 Right	= {Vector2.new(1, 0),	Vector2.new(0, 0),	"rbxassetid://2911851464"},
-	 
-	 TopLeft		= {Vector2.new(-1, -1),	Vector2.new(1, -1),	"rbxassetid://2911852219"},
-	 TopRight	= {Vector2.new(1, -1),	Vector2.new(0, -1),	"rbxassetid://2911851859"},
-	 BottomLeft	= {Vector2.new(-1, 1),	Vector2.new(1, 0),	"rbxassetid://2911851859"},
-	 BottomRight	= {Vector2.new(1, 1),	Vector2.new(0, 0),	"rbxassetid://2911852219"},
- }
- 
- cmdExample.Parent = nil
- chatExample.Parent = nil
- commandExample.Parent = nil
- resizeFrame.Parent = nil
- 
- local rPlayer = Players:FindFirstChildWhichIsA("Player")
- local coreGuiProtection = {}
- 
- pcall(function()
-	 for i, v in pairs(ScreenGui:GetDescendants()) do
-		 coreGuiProtection[v] = rPlayer.Name
-	 end
-	 ScreenGui.DescendantAdded:Connect(function(v)
-		 coreGuiProtection[v] = rPlayer.Name
-	 end)
-	 coreGuiProtection[ScreenGui] = rPlayer.Name
-	  
-	 local meta = getrawmetatable(game)
-	 local tostr = meta.__tostring
-	 setreadonly(meta, false)
-	 meta.__tostring = newcclosure(function(t)
-		 if coreGuiProtection[t] and not checkcaller() then
-			 return coreGuiProtection[t]
-		 end
-		 return tostr(t)
-	 end)
- end)
+local localPlayer = game:GetService("Players").LocalPlayer
+local currentCamera = game:GetService("Workspace").CurrentCamera
+local mouse = localPlayer:GetMouse()
 
- if not RunService:IsStudio() then
-	 local newGui = game:GetService("CoreGui"):FindFirstChildWhichIsA("ScreenGui")
-	 newGui.DescendantAdded:Connect(function(v)
-		 coreGuiProtection[v] = rPlayer.Name
-	 end)
-	 for i, v in pairs(ScreenGui:GetChildren()) do
-		 v.Parent = newGui
-	 end
-	 ScreenGui = newGui
- end
- 
- --[[ GUI FUNCTIONS ]]--
- gui = {}
- gui.txtSize = function(ui, x, y)
-	 local textService = game:GetService("TextService")
-	 return textService:GetTextSize(ui.Text, ui.TextSize, ui.Font, Vector2.new(x, y))
- end
- gui.commands = function()
-	 if not commandsFrame.Visible then
-		 commandsFrame.Visible = true
-		 commandsList.CanvasSize = UDim2.new(0, 0, 0, 0)
-	 end
-	 for i, v in pairs(commandsList:GetChildren()) do
-		 if v:IsA("TextLabel") then
-			 Destroy(v)
-		 end
-	 end
-	 local i = 0
-	 for cmdName, tbl in pairs(Commands) do
-		 local Cmd = commandExample:Clone()
-		 Cmd.Parent = commandsList
-		 Cmd.Name = cmdName
-		 Cmd.Text = " " .. tbl[2][1]
-		 Cmd.MouseEnter:Connect(function()
-			 description.Visible = true
-			 description.Text = tbl[2][2]
-		 end)
-		 Cmd.MouseLeave:Connect(function()
-			 if description.Text == tbl[2][2] then
-				 description.Visible = false
-				 description.Text = ""
-			 end
-		 end)
-		 i = i + 1
-	 end
-	 commandsList.CanvasSize = UDim2.new(0, 0, 0, i*20+10)
-	 commandsFrame.Position = UDim2.new(0.5, -283/2, 0.5, -260/2)
- end
- gui.chatlogs = function()
-	 if not chatLogsFrame.Visible then
-		 chatLogsFrame.Visible = true
-	 end
-	 chatLogsFrame.Position = UDim2.new(0.5, -283/2+5, 0.5, -260/2+5)
- end
- 
- gui.tween = function(obj, style, direction, duration, goal)
-	 local tweenInfo = TweenInfo.new(duration, Enum.EasingStyle[style], Enum.EasingDirection[direction])
-	 local tween = TweenService:Create(obj, tweenInfo, goal)
-	 tween:Play()
-	 return tween
- end
- gui.mouseIn = function(guiObject, range)
-	 local pos1, pos2 = guiObject.AbsolutePosition, guiObject.AbsolutePosition + guiObject.AbsoluteSize
-	 local mX, mY = mouse.X, mouse.Y
-	 if mX > pos1.X-range and mX < pos2.X+range and mY > pos1.Y-range and mY < pos2.Y+range then
-		 return true
-	 end
-	 return false
- end
- gui.resizeable = function(ui, min, max)
-	 local rgui = resizeFrame:Clone()
-	 rgui.Parent = ui
-	 
-	 local mode
-	 local UIPos
-	 local lastSize
-	 local lastPos = Vector2.new()
-	 
-	 local function update(delta)
-		 local xy = resizeXY[(mode and mode.Name) or '']
-		 if not mode or not xy then return end
-		 local delta = (delta * xy[1]) or Vector2.new()
-		 local newSize = Vector2.new(lastSize.X + delta.X, lastSize.Y + delta.Y)
-		 newSize = Vector2.new(
-			 math.clamp(newSize.X, min.X, max.X),
-			 math.clamp(newSize.Y, min.Y, max.Y)
-		 )
-		 ui.Size = UDim2.new(0, newSize.X, 0, newSize.Y)
-		 ui.Position = UDim2.new(
-			 UIPos.X.Scale, 
-			 UIPos.X.Offset + (-(newSize.X - lastSize.X) * xy[2]).X, 
-			 UIPos.Y.Scale, 
-			 UIPos.Y.Offset + (delta * xy[2]).Y
-		 )
-	 end
-	 
-	 mouse.Move:Connect(function()
-		 update(Vector2.new(mouse.X, mouse.Y) - lastPos)
-	 end)
-	 
-	 for _, button in pairs(rgui:GetChildren()) do
-		 local isIn = false
-		 button.InputBegan:Connect(function(input)
-			 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				 mode = button
-				 lastPos = Vector2.new(mouse.X, mouse.Y)
-				 lastSize = ui.AbsoluteSize
-				 UIPos = ui.Position
-			 end
-		 end)
-		 button.InputEnded:Connect(function(input)
-			 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-				 mode = nil
-			 end
-		 end)
-		 button.MouseEnter:Connect(function()
-			 mouse.Icon = resizeXY[button.Name][3]
-		 end)
-		 button.MouseLeave:Connect(function()
-			 if mouse.Icon == resizeXY[button.Name][3] then
-				 mouse.Icon = ""
-			 end
-		 end)
-	 end
- end
- gui.draggable = function(ui, dragui)
-	 if not dragui then dragui = ui end
-	 local UserInputService = game:GetService("UserInputService")
-	 
-	 local dragging
-	 local dragInput
-	 local dragStart
-	 local startPos
-	 
-	 local function update(input)
-		 local delta = input.Position - dragStart
-		 ui.Position = UDim2.new(startPos.X.Scale, startPos.X.Offset + delta.X, startPos.Y.Scale, startPos.Y.Offset + delta.Y)
-	 end
-	 
-	 dragui.InputBegan:Connect(function(input)
-		 if input.UserInputType == Enum.UserInputType.MouseButton1 or input.UserInputType == Enum.UserInputType.Touch then
-			 dragging = true
-			 dragStart = input.Position
-			 startPos = ui.Position
-			 
-			 input.Changed:Connect(function()
-				 if input.UserInputState == Enum.UserInputState.End then
-					 dragging = false
-				 end
-			 end)
-		 end
-	 end)
-	 
-	 dragui.InputChanged:Connect(function(input)
-		 if input.UserInputType == Enum.UserInputType.MouseMovement or input.UserInputType == Enum.UserInputType.Touch then
-			 dragInput = input
-		 end
-	 end)
-	 
-	 UserInputService.InputChanged:Connect(function(input)
-		 if input == dragInput and dragging then
-			 update(input)
-		 end
-	 end)
- end
- gui.menuify = function(menu)
-	 local exit = menu:FindFirstChild("Exit", true)
-	 local mini = menu:FindFirstChild("Minimize", true)
-	 local minimized = false
-	 local sizeX, sizeY = Instance.new("IntValue", menu), Instance.new("IntValue", menu)
-	 mini.MouseButton1Click:Connect(function()
-		 minimized = not minimized
-		 if minimized then
-			 sizeX.Value = menu.Size.X.Offset
-			 sizeY.Value = menu.Size.Y.Offset
-			 gui.tween(menu, "Quart", "Out", 0.5, {Size = UDim2.new(0, 283, 0, 25)})
-		 else
-			 gui.tween(menu, "Quart", "Out", 0.5, {Size = UDim2.new(0, sizeX.Value, 0, sizeY.Value)})
-		 end
-	 end)
-	 exit.MouseButton1Click:Connect(function()
-		 menu.Visible = false
-	 end)
-	 gui.draggable(menu, menu.Topbar)
-	 menu.Visible = false
- end
-
-
- gui.loadCommands = function()
-	for i, v in pairs(cmdAutofill:GetChildren()) do
-		if v.Name ~= "UIListLayout" then
-			Destroy(v)
-		end
-	end
-	local last = nil
-	local i = 0
-	for name, tbl in pairs(Commands) do
-		local info = tbl[2]
-		local btn = cmdExample:Clone()
-		btn.Parent = cmdAutofill
-		btn.Name = name
-		btn.Input.Text = info[1]
-		i = i + 1
-		
-		local size = btn.Size
-		btn.Size = UDim2.new(0, 0, 0, 25)
-		btn.Size = size
-	end
+local function getClosestPlayer()
+    local closestPlayer = nil
+    local shortestDistance = math.huge
+    for i, v in pairs(game:GetService("Players"):GetPlayers()) do
+        if v.Name ~= localPlayer.Name then
+            if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then
+                if v.Character:FindFirstChildOfClass("ForceField") then
+                else
+                    local ray = Ray.new(v.Character:FindFirstChild("HumanoidRootPart").Position, Vector3.new(0, -100000, 0))
+                    local Hit = game:GetService("Workspace"):FindPartOnRay(ray, v.Character)
+                    if Hit then
+                        local magnitude = (v.Character.HumanoidRootPart.Position - localPlayer.Character.HumanoidRootPart.Position).magnitude
+                        if magnitude < shortestDistance then
+                            closestPlayer = v
+                            shortestDistance = magnitude
+                        end
+                    end
+                end
+            end
+        end
+    end
+    return closestPlayer
 end
 
-	 gui.loadCommands()
-  for i, v in ipairs(cmdAutofill:GetChildren()) do
-		 if v:IsA("Frame") then
-			 v.Visible = false
-		 end
-	 end
- gui.barSelect = function(speed)
-	 centerBar.Visible = true
-	 gui.tween(centerBar, "Sine", "Out", speed or 0.25, {Size = UDim2.new(0, 250, 1, 15)})
-	 gui.tween(leftFill, "Quad", "Out", speed or 0.3, {Position = UDim2.new(0, 0, 0.5, 0)})
-	 gui.tween(rightFill, "Quad", "Out", speed or 0.3, {Position = UDim2.new(1, 0, 0.5, 0)})
- end
- gui.barDeselect = function(speed)
-	 gui.tween(centerBar, "Sine", "Out", speed or 0.25, {Size = UDim2.new(0, 250, 0, 0)})
-	 gui.tween(leftFill, "Sine", "In", speed or 0.3, {Position = UDim2.new(-0.5, 100, 0.5, 0)})
-	 gui.tween(rightFill, "Sine", "In", speed or 0.3, {Position = UDim2.new(1.5, -100, 0.5, 0)})
-	 for i, v in ipairs(cmdAutofill:GetChildren()) do
-		 if v:IsA("Frame") then
-			 wrap(function()
-				 wait(math.random(1, 200)/2000)
-				 gui.tween(v, "Back", "In", 0.35, {Size = UDim2.new(0, 0, 0, 25)})
-			 end)
-		 end
-	end
- end
+local stateType = Enum.HumanoidStateType
+local character = game.Players.LocalPlayer.Character
+local humanoid = character:WaitForChild("Humanoid")
 
- -- [[ AUTOFILL SEARCHER ]] --
- gui.searchCommands = function()
-	local str = (cmdInput.Text:gsub(";", "")):lower()
-	local index = 0
-	local lastFrame
-	for _, v in ipairs(cmdAutofill:GetChildren()) do
-		if v:IsA("Frame") and index < 5 then
-			local cmd = Commands[v.Name]
-			local name = cmd and cmd[2][1] or ""
-			v.Input.Text = str ~= "" and v.Name:find(str) == 1 and v.Name or name
-			v.Visible = str == "" or v.Name:find(str)
-			if v.Visible then
-				index = index + 1
-				local n = math.sqrt(index) * 125
-				local yPos = (index - 1) * 28
-				local newPos = UDim2.new(0.5, 0, 0, yPos)
-				gui.tween(v, "Quint", "Out", 0.3, {
-					Size = UDim2.new(0.5, n, 0, 25),
-					Position = lastFrame and newPos or UDim2.new(0.5, 0, 0, yPos),
-				})
-				lastFrame = v
-			end
-		end
-	end
+humanoid:SetStateEnabled(stateType.FallingDown, false)
+humanoid:SetStateEnabled(stateType.Ragdoll, false)
+
+while true do
+    wait()
+    spawn(function()
+        if getgenv().executed then
+        else
+            getgenv().executed = true
+            spawn(function()
+                getgenv().i_said_right_foot_creep = false
+                getgenv().ssss = game.Players.LocalPlayer:GetMouse()
+                local function freakingswordtoggle()
+                    holyfreakingswordbot = not holyfreakingswordbot
+                    if holyfreakingswordbot == true then
+                        getgenv().i_said_right_foot_creep = true
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = false
+                    else
+                        getgenv().i_said_right_foot_creep = false
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = true
+                    end
+                end
+            end)
+        end
+    end)
+    local targit = getClosestPlayer()
+    if game:GetService("Players").LocalPlayer.Character.PrimaryPart and getClosestPlayer() ~= nil and getgenv().i_said_right_foot_creep == true then
+        local TargetPart = getClosestPlayer().Character.HumanoidRootPart
+        local Part = game.Players.LocalPlayer.Character.HumanoidRootPart
+        local RotateX, RotateY, RotateZ = 0, 0, 0
+        Part.CFrame = CFrame.new(Part.Position, TargetPart.Position) * CFrame.Angles(math.rad(0), math.rad(25), math.rad(0))
+        game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(getClosestPlayer().Character.HumanoidRootPart.CFrame * Vector3.new(-3, 0, 0))
+        if getClosestPlayer().Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+            game.Players.LocalPlayer.Character.Humanoid.Jump = true
+        end
+    end
 end
 
- --[[ GUI FUNCTIONALITY ]]--
+local stateType = Enum.HumanoidStateType
+local character = game.Players.LocalPlayer.Character
+local humanoid = character:WaitForChild("Humanoid")
 
--- [[ OPEN THE COMMAND BAR ]] -- 
- mouse.KeyDown:Connect(function(k)
-	 if k:lower() == opt.prefix then
-		 gui.barSelect()
-		 cmdInput.Text = ''
-		 cmdInput:CaptureFocus()
-				 wait(0.00005)
-							 cmdInput.Text = ''
-	 end
- end)
+humanoid:SetStateEnabled(stateType.FallingDown, false)
+humanoid:SetStateEnabled(stateType.Ragdoll, false)
+end)
 
- -- [[ CLOSE THE COMMAND BAR ]] -- 
- cmdInput.FocusLost:Connect(function(enterPressed)
-	 if enterPressed then
-		 wrap(function()
-			 lib.parseCommand(opt.prefix .. cmdInput.Text)
-		 end)
-	 end
-	 gui.barDeselect()
-	 end)
- 
- cmdInput.Changed:Connect(function(p)
-	 if p ~= "Text" then return end
-	 gui.searchCommands()
- end)
- 
- gui.barDeselect(0)
- cmdBar.Visible = true
- gui.menuify(chatLogsFrame)
- gui.menuify(commandsFrame)
- 
- -- [[ GUI RESIZE FUNCTION ]] -- 
-
--- table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) | searches if the player is on mobile.
- if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then 
- else
- gui.resizeable(chatLogsFrame, Vector2.new(173,58), Vector2.new(1000,1000))
- gui.resizeable(commandsFrame, Vector2.new(184,84), Vector2.new(1000,1000))
- end
- 
- -- [[ CMDS COMMANDS SEARCH FUNCTION ]] --
- commandsFilter.Changed:Connect(function(p)
-	 if p ~= "Text" then return end
-	 for i, v in pairs(commandsList:GetChildren()) do
-		 if v:IsA("TextLabel") then
-			 if v.Name:find(commandsFilter.Text:lower()) and v.Name:find(commandsFilter.Text:lower()) <= 2 then
-				 v.Visible = true
-			 else
-				 v.Visible = false
-			 end
-		 end
-	 end
- end)
- 
- -- [[ CHAT TO USE COMMANDS ]] --
- local function bindToChat(plr, msg)
-	 local chatMsg = chatExample:Clone()
-	 for i, v in pairs(chatLogs:GetChildren()) do
-		 if v:IsA("TextLabel") then
-			 v.LayoutOrder = v.LayoutOrder + 1
-		 end
-	 end
-	 chatMsg.Parent = chatLogs
-	 chatMsg.Text = ("[%s]: %s"):format(plr.Name, msg)
-	 
-	 local txtSize = gui.txtSize(chatMsg, chatMsg.AbsoluteSize.X, 100)
-	 chatMsg.Size = UDim2.new(1, -5, 0, txtSize.Y)
- end
- 
- for i, plr in pairs(Players:GetPlayers()) do
-	 plr.Chatted:Connect(function(msg)
-		 bindToChat(plr, msg)
-	 end)
- end
- Players.PlayerAdded:Connect(function(plr)
-	 plr.Chatted:Connect(function(msg)
-		 bindToChat(plr, msg)
-	 end)
- end)
- 
- mouse.Move:Connect(function()
-	 description.Position = UDim2.new(0, mouse.X, 0, mouse.Y)
-	 local size = gui.txtSize(description, 200, 100)
-	 description.Size = UDim2.new(0, size.X, 0, size.Y)
- end)
- 
- RunService.Stepped:Connect(function()
-	 chatLogs.CanvasSize = UDim2.new(0, 0, 0, chatLogs.UIListLayout.AbsoluteContentSize.Y)
-	 commandsList.CanvasSize = UDim2.new(0, 0, 0, commandsList.UIListLayout.AbsoluteContentSize.Y)
- end)
- 
- -- all this does is print i dont know why i made it a loadstring
- loadstring(game:HttpGet("https://raw.githubusercontent.com/FilteringEnabled/FE/main/asd"))();
- 
- -- never used this lol
- function Destroy(guiObject)
-	 if not pcall(function()guiObject.Parent = game:GetService("CoreGui")end) then
-		 guiObject.Parent = nil
-	 end
- end
- 
- wait(0.2)
- 
- -- [[ COMMAND BAR BUTTON ]] --
- local ScreenGui = Instance.new("ScreenGui")
- local TextClickButton = Instance.new("TextButton")
- local UICorner = Instance.new("UICorner")
- 
- ScreenGui.Parent = game.CoreGui
- ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
- ScreenGui.ResetOnSpawn = true
- 
- TextClickButton.Name = "NamedAdminButton"
- TextClickButton.Parent = ScreenGui
- TextClickButton.BackgroundColor3 = Color3.fromRGB(4, 4, 4)
- TextClickButton.BackgroundTransparency = 1.000
- TextClickButton.Position = UDim2.new(0.418, 0,0, 0)
- TextClickButton.Size = UDim2.new(0, 2, 0, 33)
- TextClickButton.Font = Enum.Font.SourceSansBold
- TextClickButton.Text = "Named Admin " .. currentversion .. ""
- TextClickButton.TextColor3 = Color3.fromRGB(255, 255, 255)
- TextClickButton.TextSize = 20.000
- TextClickButton.TextWrapped = true
- 
- UICorner.CornerRadius = UDim.new(1, 0)
- UICorner.Parent = TextClickButton
- 
- local function PZORYLB_fake_script() -- TextClickButton.LocalScript 
-	 local script = Instance.new('LocalScript', TextClickButton)
-	 textclickbutton = script.Parent
-	 textclickbutton.Size = UDim2.new(0, 2,0, 33)
-	 textclickbutton.BackgroundTransparency = 0.14
-	 textclickbutton:TweenSize(UDim2.new(0, 251,0, 33), "Out", "Quint",1,true)
-	 wait(2)
-	 textclickbutton:TweenSize(UDim2.new(0, 32, 0, 33), "Out", "Quint",1,true)
-	 textclickbutton:TweenPosition(UDim2.new(0.48909232, 0, 0, 0), "Out", "Quint",1,true)
-	 wait(0.4)
-	 textclickbutton.Text = "NA"
-	 textclickbutton.Active = true
- gui.draggable(textclickbutton)
- end
- coroutine.wrap(PZORYLB_fake_script)()
- 
- TextClickButton.MouseButton1Click:Connect(function()
-	 gui.barSelect()
-		 cmdInput.Text = ''
-		 cmdInput:CaptureFocus()
- end)
-
- --[[
-	End of the source code.
-	Join the discord for updates or give command ideas, that could be added.
-	https://discord.gg/9Dn6Td5xzz
---]]
+ cmd.add({"noswordbot", "nosbot", "unswordbot", "unsbot"}, {"unswordbot/noswordbot", "stop the bot yeaaaaa....?"}, function()
+local function StopTheSillySwordScriptAndIGotALongNameForThisFunction()
+    if holyfreakingswordbot == true then
+        freakingswordtoggle()
+    else
+    end
+end
+StopTheSillySwordScriptAndIGotALongNameForThisFunction()
+end)
