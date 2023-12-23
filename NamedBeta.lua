@@ -14901,7 +14901,7 @@ coroutine.wrap(OMQRQRC_fake_script)()
    end)
  end)
 
- cmd.add({"swordbot", "sbot"}, {"swordbot", "Sword bot that kills!!1!"}, function()
+cmd.add({"swordbot", "sbot"}, {"swordbot", "Sword bot that kills!!1!"}, function()
  getgenv().i_said_right_foot_creep = false
 holyfuckingswordbot = false
 
@@ -15024,7 +15024,7 @@ end
 
 		end
     
-    end)
+    end
 end
    local stateType = Enum.HumanoidStateType
 
@@ -15039,7 +15039,7 @@ if holyfuckingswordbot == false then
 else
 end
 end)
- cmd.add({"swordbot", "unsbot", "noswordbot", "nosbot"}, {"unswordbot/noswordbot", "Stop the murder!!!!"}, function()
+ cmd.add({"unswordbot", "unsbot", "noswordbot", "nosbot"}, {"unswordbot/noswordbot", "Stop the murder!!!!"}, function()
  if holyfuckingswordbot == true then
      fuckingswordtoggle()
 else
