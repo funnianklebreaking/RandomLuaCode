@@ -14909,7 +14909,7 @@ coroutine.wrap(OMQRQRC_fake_script)()
 	Description = "Drop button enabled.";
 	Title = "Named Admin";
 	Duration = 5;
-	});
+   });
  end)
  
  cmd.add({"swordbot", "sbot"}, {"swordbot", "SWORD BOT YEEEE [Keybind is X]"}, function()
@@ -15025,7 +15025,6 @@ humanoid:SetStateEnabled(stateType.FallingDown, false)
 humanoid:SetStateEnabled(stateType.Ragdoll, false)
 
 if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then 
-	wait();
 	Notify({
 	Description = "Named Admin has detected you using mobile you now have a toggle button.";
 	Title = "Named Admin";
@@ -15073,11 +15072,6 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
         end)
     coroutine.wrap(FEPVI_fake_script)()
 else
-Notify({
-	Description = "SwordBot Enabled, Keybind is X";
-	Title = "Named Admin";
-	Duration = 5;
-	});
 end
 end)
  
