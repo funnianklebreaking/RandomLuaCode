@@ -14908,20 +14908,20 @@ coroutine.wrap(OMQRQRC_fake_script)()
  end)
 
  cmd.add({"swordbot", "sbot"}, {"swordbot", "become a fucking killer while holding a sword."}, function()
-getgenv().i_said_right_foot_creep = false
-holyfuckingswordbot = false
+getgenv().i_said_right_foot_creep = true
+holyfuckingswordbot = true
 
 game:GetService("RunService").RenderStepped:Connect(function()
-    if i_said_right_foot_creep == true then
+    if getgenv().i_said_right_foot_creep == true then
         spawn(function()
             local tool = game.Players.LocalPlayer.Character and game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool")
-                if tool and tool:FindFirstChild("Handle") then
-                    tool:Activate()
-                    local p = game.Players:GetPlayers()
-                    for i = 2, #p do
+            if tool and tool:FindFirstChild("Handle") then
+                tool:Activate()
+                local p = game.Players:GetPlayers()
+                for i = 2, #p do
                     local v = p[i].Character
-                        if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:DistanceFromCharacter(v.HumanoidRootPart.Position) <= 15 then
-                            for i, v in next, v:GetChildren() do
+                    if v and v:FindFirstChild("Humanoid") and v.Humanoid.Health > 0 and v:FindFirstChild("HumanoidRootPart") and game.Players.LocalPlayer:DistanceFromCharacter(v.HumanoidRootPart.Position) <= 15 then
+                        for i, v in next, v:GetChildren() do
                             if v:IsA("BasePart") then
                                 firetouchinterest(tool.Handle, v, 0)
                                 firetouchinterest(tool.Handle, v, 1)
@@ -14933,6 +14933,7 @@ game:GetService("RunService").RenderStepped:Connect(function()
         end)
     end
 end)
+
 local localPlayer = game:GetService("Players").LocalPlayer
 local currentCamera = game:GetService("Workspace").CurrentCamera
 local mouse = localPlayer:GetMouse()
@@ -14941,12 +14942,12 @@ local function getClosestPlayer()
     local closestPlayer = nil
     local shortestDistance = math.huge
     for i, v in pairs(game:GetService("Players"):GetPlayers()) do
-    if v.Name ~= localPlayer.Name then
-        if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then
-            if v.Character:FindFirstChildOfClass("ForceField") then
-            else
-                local ray = Ray.new(v.Character:FindFirstChild("HumanoidRootPart").Position, Vector3.new(0, -100000, 0))
-                local Hit = game:GetService("Workspace"):FindPartOnRay(ray, v.Character)
+        if v.Name ~= localPlayer.Name then
+            if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then
+                if v.Character:FindFirstChildOfClass("ForceField") then
+                else
+                    local ray = Ray.new(v.Character:FindFirstChild("HumanoidRootPart").Position, Vector3.new(0, -100000, 0))
+                    local Hit = game:GetService("Workspace"):FindPartOnRay(ray, v.Character)
                     if Hit then
                         local magnitude = (v.Character.HumanoidRootPart.Position - localPlayer.Character.HumanoidRootPart.Position).magnitude
                         if magnitude < shortestDistance then
@@ -14962,7 +14963,6 @@ local function getClosestPlayer()
 end
 
 local stateType = Enum.HumanoidStateType
-
 local character = game.Players.LocalPlayer.Character
 local humanoid = character:WaitForChild("Humanoid")
 
@@ -14972,60 +14972,50 @@ humanoid:SetStateEnabled(stateType.Ragdoll, false)
 while true do
     wait()
     spawn(function()
+        if getgenv().executed then
+        else
+            getgenv().executed = true
             spawn(function()
-                if executed then
-            else
-                getgenv().executed = true
-                    spawn(function()
+                getgenv().i_said_right_foot_creep = false
+                getgenv().ssss = game.Players.LocalPlayer:GetMouse()
+
+                local function fuckingswordtoggle()
+                    holyfuckingswordbot = not holyfuckingswordbot
+                    if holyfuckingswordbot == true then
+                        getgenv().i_said_right_foot_creep = true
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = false
+                    else
                         getgenv().i_said_right_foot_creep = false
-                        getgenv().ssss = game.Players.LocalPlayer:GetMouse()
-                        local function fuckingswordtoggle()
-                            holyfuckingswordbot = not holyfuckingswordbot
-                                if holyfuckingswordbot == true then
-                                    if i_said_right_foot_creep == false then
-                                        getgenv().i_said_right_foot_creep = true
-                                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").AutoRotate = false
-                                    else
-                                        getgenv().i_said_right_foot_creep = false
-                                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass("Humanoid").AutoRotate = true
-                                    end
-                                end
-                            end
-                        end)
-                    end
-                end)
-                local maggot = getClosestPlayer()
-                if game:GetService("Players").LocalPlayer.Character.PrimaryPart and getClosestPlayer() ~= nil and i_said_right_foot_creep == true then
-                    local TargetPart = getClosestPlayer().Character.HumanoidRootPart
-                    local Part = game.Players.LocalPlayer.Character.HumanoidRootPart
-                    local RotateX, RotateY, RotateZ = 0, 0, 0
-                    Part.CFrame = CFrame.new(Part.Position, TargetPart.Position) * CFrame.Angles(math.rad(0), math.rad(25), math.rad(0))
-                    game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(getClosestPlayer().Character.HumanoidRootPart.CFrame * Vector3.new(-3, 0, 0))
-                    if getClosestPlayer().Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-                        game.Players.LocalPlayer.Character.Humanoid.Jump = true
+                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = true
                     end
                 end
-        end)
+            end)
+        end
+    end)
+    local maggot = getClosestPlayer()
+    if game:GetService("Players").LocalPlayer.Character.PrimaryPart and getClosestPlayer() ~= nil and getgenv().i_said_right_foot_creep == true then
+        local TargetPart = getClosestPlayer().Character.HumanoidRootPart
+        local Part = game.Players.LocalPlayer.Character.HumanoidRootPart
+        local RotateX, RotateY, RotateZ = 0, 0, 0
+        Part.CFrame = CFrame.new(Part.Position, TargetPart.Position) * CFrame.Angles(math.rad(0), math.rad(25), math.rad(0))
+        game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(getClosestPlayer().Character.HumanoidRootPart.CFrame * Vector3.new(-3, 0, 0))
+        if getClosestPlayer().Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+            game.Players.LocalPlayer.Character.Humanoid.Jump = true
+        end
+    end
 end
-local stateType = Enum.HumanoidStateType
 
+local stateType = Enum.HumanoidStateType
 local character = game.Players.LocalPlayer.Character
 local humanoid = character:WaitForChild("Humanoid")
 
 humanoid:SetStateEnabled(stateType.FallingDown, false)
 humanoid:SetStateEnabled(stateType.Ragdoll, false)
-
-if holyfuckingswordbot == false then
-    fuckingswordtoggle()
-else
-end
 end)
 
  cmd.add({"noswordbot", "nosbot", "unswordbot", "unsbot"}, {"unswordbot/noswordbot", "You gonna play legit now? lame."}, function()
-if holyfuckingswordbot == true then
-    fuckingswordtoggle()
-else
-end
+getgenv().i_said_right_foot_creep = false
+holyfuckingswordbot = false
 end)
  
  
