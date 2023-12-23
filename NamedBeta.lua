@@ -14905,11 +14905,15 @@ coroutine.wrap(OMQRQRC_fake_script)()
    DropButton.MouseButton1Click:Connect(function()
    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
    end)
+   Notify({
+	Description = "Drop button enabled.";
+	Title = "Named Admin";
+	Duration = 5;
+	});
  end)
-
-cmd.add({"swordbot", "sbot"}, {"swordbot", "become a freaking bot while holding a sword."}, function()
-getgenv().i_said_right_foot_creep = true
-holyfreakingswordbot = true
+ 
+ cmd.add({"swordbot", "sbot"}, {"swordbot", "SWORD BOT YEEEE [Keybind is X]"}, function()
+ getgenv().i_said_right_foot_creep = true
 
 game:GetService("RunService").RenderStepped:Connect(function()
     if getgenv().i_said_right_foot_creep == true then
@@ -14941,6 +14945,7 @@ local mouse = localPlayer:GetMouse()
 local function getClosestPlayer()
     local closestPlayer = nil
     local shortestDistance = math.huge
+
     for i, v in pairs(game:GetService("Players"):GetPlayers()) do
         if v.Name ~= localPlayer.Name then
             if v.Character and v.Character:FindFirstChild("Humanoid") and v.Character.Humanoid.Health ~= 0 and v.Character:FindFirstChild("HumanoidRootPart") and v.Character:FindFirstChild("Head") then
@@ -14948,8 +14953,10 @@ local function getClosestPlayer()
                 else
                     local ray = Ray.new(v.Character:FindFirstChild("HumanoidRootPart").Position, Vector3.new(0, -100000, 0))
                     local Hit = game:GetService("Workspace"):FindPartOnRay(ray, v.Character)
+
                     if Hit then
                         local magnitude = (v.Character.HumanoidRootPart.Position - localPlayer.Character.HumanoidRootPart.Position).magnitude
+
                         if magnitude < shortestDistance then
                             closestPlayer = v
                             shortestDistance = magnitude
@@ -14972,36 +14979,42 @@ humanoid:SetStateEnabled(stateType.Ragdoll, false)
 while true do
     wait()
     spawn(function()
-        if getgenv().executed then
-        else
-            getgenv().executed = true
-            spawn(function()
-                getgenv().i_said_right_foot_creep = true
-                getgenv().ssss = game.Players.LocalPlayer:GetMouse()
-                local function freakingswordtoggle()
-                    holyfreakingswordbot = not holyfreakingswordbot
-                    if holyfreakingswordbot == true then
-                        getgenv().i_said_right_foot_creep = true
-                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = false
-                    else
-                        getgenv().i_said_right_foot_creep = false
-                        game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = true
-                    end
-                end
-            end)
+        spawn(function()
+            if executed then
+            else
+                getgenv().executed = true
+                spawn(function()
+                    getgenv().i_said_right_foot_creep = false
+                    getgenv().ssss = game.Players.LocalPlayer:GetMouse()
+
+                    ssss.KeyDown:connect(function(key)
+                        if key == "x" then
+                            if getgenv().i_said_right_foot_creep == false then
+                                getgenv().i_said_right_foot_creep = true
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = false
+                            else
+                                getgenv().i_said_right_foot_creep = false
+                                game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = true
+                            end
+                        end
+                    end)
+                end)
+            end
+        end)
+        local maggot = getClosestPlayer()
+        if game:GetService("Players").LocalPlayer.Character.PrimaryPart and getClosestPlayer() ~= nil and getgenv().i_said_right_foot_creep == true then
+            local TargetPart = getClosestPlayer().Character.HumanoidRootPart
+            local Part = game.Players.LocalPlayer.Character.HumanoidRootPart
+            local RotateX, RotateY, RotateZ = 0, 0, 0
+
+            Part.CFrame = CFrame.new(Part.Position, TargetPart.Position) * CFrame.Angles(math.rad(0), math.rad(25), math.rad(0))
+
+            game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(getClosestPlayer().Character.HumanoidRootPart.CFrame * Vector3.new(-3, 0, 0))
+            if getClosestPlayer().Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
+                game.Players.LocalPlayer.Character.Humanoid.Jump = true
+            end
         end
     end)
-    local targit = getClosestPlayer()
-    if game:GetService("Players").LocalPlayer.Character.PrimaryPart and getClosestPlayer() ~= nil and getgenv().i_said_right_foot_creep == true then
-        local TargetPart = getClosestPlayer().Character.HumanoidRootPart
-        local Part = game.Players.LocalPlayer.Character.HumanoidRootPart
-        local RotateX, RotateY, RotateZ = 0, 0, 0
-        Part.CFrame = CFrame.new(Part.Position, TargetPart.Position) * CFrame.Angles(math.rad(0), math.rad(25), math.rad(0))
-        game:GetService("Players").LocalPlayer.Character.Humanoid:MoveTo(getClosestPlayer().Character.HumanoidRootPart.CFrame * Vector3.new(-3, 0, 0))
-        if getClosestPlayer().Character.Humanoid:GetState() == Enum.HumanoidStateType.Freefall then
-            game.Players.LocalPlayer.Character.Humanoid.Jump = true
-        end
-    end
 end
 
 local stateType = Enum.HumanoidStateType
@@ -15010,11 +15023,62 @@ local humanoid = character:WaitForChild("Humanoid")
 
 humanoid:SetStateEnabled(stateType.FallingDown, false)
 humanoid:SetStateEnabled(stateType.Ragdoll, false)
-end)
 
- cmd.add({"noswordbot", "nosbot", "unswordbot", "unsbot"}, {"unswordbot/noswordbot", "stop the bot yeaaaaa....?"}, function()
-getgenv().i_said_right_foot_creep = false
-holyfreakingswordbot = false
+if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then 
+	wait();
+	Notify({
+	Description = "Named Admin has detected you using mobile you now have a button lmao";
+	Title = "Named Admin";
+	Duration = 5;
+	});
+
+    local UIS = game:GetService("UserInputService")
+    local ScreenGui = Instance.new("ScreenGui")
+    local TextButton = Instance.new("TextButton")
+    local UICorner = Instance.new("UICorner")
+    local UIAspectRatioConstraint = Instance.new("UIAspectRatioConstraint")
+
+    ScreenGui.Parent = game.CoreGui
+    ScreenGui.ZIndexBehavior = Enum.ZIndexBehavior.Sibling
+    ScreenGui.ResetOnSpawn = false
+
+    TextButton.Parent = ScreenGui
+    TextButton.BackgroundColor3 = Color3.fromRGB(12, 4, 20)
+    TextButton.BackgroundTransparency = 0.140
+    TextButton.Position = UDim2.new(0.933, 0,0.621, 0)
+    TextButton.Size = UDim2.new(0.043, 0,0.083, 0)
+    TextButton.Font = Enum.Font.SourceSansBold
+    TextButton.Text = "X"
+    TextButton.TextColor3 = Color3.fromRGB(255, 255, 255)
+    TextButton.TextSize = 15.000
+    TextButton.TextWrapped = true
+    TextButton.Active = true
+    TextButton.Draggable = true
+    TextButton.TextScaled = true
+
+    UICorner.Parent = TextButton
+
+    UIAspectRatioConstraint.Parent = TextButton
+    UIAspectRatioConstraint.AspectRatio = 1.060
+
+    local function FEPVI_fake_script() -- TextButton.LocalScript 
+    	local script = Instance.new('LocalScript', TextButton)
+    	script.Parent.MouseButton1Click:Connect(function()
+    	UIS:InputBegan({KeyCode = Enum.KeyCode.X})
+        	if getgenv().i_said_right_foot_creep == true then
+        	    TextButton.Text = "Bot On"
+        	else
+        	    TextButton.Text = "Bot Off"
+            end
+        end)
+    coroutine.wrap(FEPVI_fake_script)()
+else
+Notify({
+	Description = "SwordBot Enabled, Keybind is X";
+	Title = "Named Admin";
+	Duration = 5;
+	});
+end
 end)
  
  -- [[ PLUGIN LOADER ]] -- 
