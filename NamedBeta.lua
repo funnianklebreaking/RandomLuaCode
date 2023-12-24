@@ -15064,7 +15064,6 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
         end)
     coroutine.wrap(FEPVI_fake_script)()
 else
-end
 end)
  
  -- [[ PLUGIN LOADER ]] -- 
