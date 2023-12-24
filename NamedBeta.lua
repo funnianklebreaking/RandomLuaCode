@@ -14905,11 +14905,6 @@ coroutine.wrap(OMQRQRC_fake_script)()
    DropButton.MouseButton1Click:Connect(function()
    game.Players.LocalPlayer.Character:FindFirstChildOfClass("Tool").Parent = game.Workspace
    end)
-   Notify({
-	Description = "Drop button enabled.";
-	Title = "Named Admin";
-	Duration = 5;
-   });
  end)
  
  cmd.add({"swordbot", "sbot"}, {"swordbot", "SWORD BOT YEEEE [Keybind is X]"}, function()
@@ -15057,11 +15052,14 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
     local function FEPVI_fake_script() -- TextButton.LocalScript 
     	local script = Instance.new('LocalScript', TextButton)
     	script.Parent.MouseButton1Click:Connect(function()
-    	game:GetService("UserInputService"):InputBegan({Enum.KeyCode.X})
-        	if getgenv().i_said_right_foot_creep == true then
-        	    TextButton.Text = "Bot On"
-        	else
-        	    TextButton.Text = "Bot Off"
+	game:GetService("VirtualInputManager"):SendKeyEvent(true, "X" ,false ,game)
+	wait()
+	game:GetService("VirtualInputManager"):SendKeyEvent(false, "X" ,false ,game)
+	wait()
+            if getgenv().i_said_right_foot_creep == true then
+                TextButton.Text = "Bot On"
+            else
+                TextButton.Text = "Bot Off"
             end
         end)
     coroutine.wrap(FEPVI_fake_script)()
