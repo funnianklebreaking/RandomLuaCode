@@ -15024,14 +15024,8 @@ local humanoid = character:WaitForChild("Humanoid")
 humanoid:SetStateEnabled(stateType.FallingDown, false)
 humanoid:SetStateEnabled(stateType.Ragdoll, false)
 
-if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then 
-	Notify({
-	Description = "Named Admin has detected you using mobile you now have a toggle button.";
-	Title = "Named Admin";
-	Duration = 5;
-	});
-
-    local UIS = game:GetService("UserInputService")
+if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserInputService"):GetPlatform()) then
+    wait()
     local ScreenGui = Instance.new("ScreenGui")
     local TextButton = Instance.new("TextButton")
     local UICorner = Instance.new("UICorner")
@@ -15063,7 +15057,7 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
     local function FEPVI_fake_script() -- TextButton.LocalScript 
     	local script = Instance.new('LocalScript', TextButton)
     	script.Parent.MouseButton1Click:Connect(function()
-    	UIS:InputBegan({KeyCode = Enum.KeyCode.X})
+    	game:GetService("UserInputService"):InputBegan({Enum.KeyCode.X})
         	if getgenv().i_said_right_foot_creep == true then
         	    TextButton.Text = "Bot On"
         	else
