@@ -15052,18 +15052,23 @@ if table.find({Enum.Platform.IOS, Enum.Platform.Android}, game:GetService("UserI
     local function FEPVI_fake_script() -- TextButton.LocalScript 
     	local script = Instance.new('LocalScript', TextButton)
     	script.Parent.MouseButton1Click:Connect(function()
-	game:GetService("VirtualInputManager"):SendKeyEvent(true, "X" ,false ,game)
-	wait()
-	game:GetService("VirtualInputManager"):SendKeyEvent(false, "X" ,false ,game)
-	wait()
-            if getgenv().i_said_right_foot_creep == true then
-                TextButton.Text = "Bot On"
-            else
-                TextButton.Text = "Bot Off"
+            getgenv().i_said_right_foot_creep = not getgenv().i_said_right_foot_creep
+                if getgenv().i_said_right_foot_creep == false then
+                    getgenv().i_said_right_foot_creep = true
+                    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = false
+                else
+                    getgenv().i_said_right_foot_creep = false
+                    game:GetService("Players").LocalPlayer.Character:FindFirstChildOfClass('Humanoid').AutoRotate = true
+                end
+                if getgenv().i_said_right_foot_creep == true then
+                    TextButton.Text = "Bot On"
+                else
+                    TextButton.Text = "Bot Off"
+                end
             end
         end)
     coroutine.wrap(FEPVI_fake_script)()
-else
+end
 end)
  
  -- [[ PLUGIN LOADER ]] -- 
